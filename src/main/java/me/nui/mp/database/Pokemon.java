@@ -44,7 +44,7 @@ public class Pokemon {
     }
 
     @Id
-    @Column(name = "ID", nullable = false, updatable = false)
+    @Column(name = "id", nullable = false, updatable = false)
     public int getId() {
         return id;
     }
