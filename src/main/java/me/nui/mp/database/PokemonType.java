@@ -1,15 +1,7 @@
 
 package me.nui.mp.database;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * A Pokemon Type entity. A type is represented by an ID and a name.
@@ -17,11 +9,11 @@ import javax.persistence.Table;
  * Pokémon, and Pokémon character names are trademarks of Nintendo.
  */
 @Entity(name = "PokemonType")
-@Table(name = "pokemontype")
+@Table(name = "pokemontype", uniqueConstraints = {@UniqueConstraint(name="name_unique",columnNames = {"name"})})
 @Access(AccessType.FIELD)
 @NamedQueries({
         @NamedQuery(name = "getPokemonTypes",
-                    query = "SELECT t FROM PokemonType t"),
+                    query = "SELECT id, name FROM PokemonType ORDER BY name"),
         @NamedQuery(name = "getPokemonTypeById",
                     query = "SELECT t FROM PokemonType t WHERE t.id = :id")
 })

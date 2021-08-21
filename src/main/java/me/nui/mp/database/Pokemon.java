@@ -2,17 +2,7 @@
 package me.nui.mp.database;
 
 import javax.json.bind.annotation.JsonbTransient;
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 /**
  * A Pokemon entity class. A Pokemon is represented as a triple of an
@@ -21,7 +11,7 @@ import javax.persistence.Transient;
  * Pokémon, and Pokémon character names are trademarks of Nintendo.
  */
 @Entity(name = "Pokemon")
-@Table(name = "pokemon")
+@Table(name = "pokemon", uniqueConstraints = {@UniqueConstraint(name="name_unique",columnNames = {"name"})})
 @Access(AccessType.PROPERTY)
 @NamedQueries({
         @NamedQuery(name = "getPokemons",
