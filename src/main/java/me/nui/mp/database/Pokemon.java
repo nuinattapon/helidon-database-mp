@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Access(AccessType.PROPERTY)
 @NamedQueries({
         @NamedQuery(name = "getPokemons",
-                    query = "SELECT p FROM Pokemon p"),
+                    query = "SELECT p FROM Pokemon p ORDER BY p.id"),
         @NamedQuery(name = "getPokemonByName",
                     query = "SELECT p FROM Pokemon p WHERE p.name = :name")
 })

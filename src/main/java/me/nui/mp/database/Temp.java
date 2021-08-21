@@ -1,25 +1,25 @@
 package me.nui.mp.database;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 
-@Entity(name = "Product")
-@Table(name = "product", uniqueConstraints = {@UniqueConstraint(name = "name_unique", columnNames = {"name"})})
+@Entity(name = "Temp")
+@Table(name = "temp", uniqueConstraints = {@UniqueConstraint(name = "name_unique", columnNames = {"name"})})
 @NamedQueries({
-        @NamedQuery(name = "getProducts",
-                query = "SELECT t FROM Product t ORDER BY t.name"),
-        @NamedQuery(name = "getProductById",
-                query = "SELECT t FROM Product t WHERE t.id = :id"),
-        @NamedQuery(name = "getProductByName",
-                query = "SELECT t FROM Product t WHERE t.name = :name")
+        @NamedQuery(name = "getTemps",
+                query = "SELECT t FROM Temp t ORDER BY t.name"),
+        @NamedQuery(name = "getTempById",
+                query = "SELECT t FROM Temp t WHERE t.id = :id"),
+        @NamedQuery(name = "getTempByName",
+                query = "SELECT t FROM Temp t WHERE t.name = :name")
 })
 @Access(value = AccessType.FIELD)
-public class Product {
+public class Temp {
 
     @Id
-    @SequenceGenerator(name = "product_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")
-    @Column(length = 36, nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false)
     private long id;
 
     @Column(nullable = false, length = 120)

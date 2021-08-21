@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Access(AccessType.FIELD)
 @NamedQueries({
         @NamedQuery(name = "getPokemonTypes",
-                    query = "SELECT id, name FROM PokemonType ORDER BY name"),
+                    query = "SELECT t FROM PokemonType t ORDER BY t.id"),
         @NamedQuery(name = "getPokemonTypeById",
                     query = "SELECT t FROM PokemonType t WHERE t.id = :id")
 })
