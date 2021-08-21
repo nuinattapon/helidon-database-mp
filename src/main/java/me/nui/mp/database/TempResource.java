@@ -7,6 +7,7 @@ import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.StreamingOutput;
 import java.util.List;
 
 @Path("temps")
@@ -57,11 +58,13 @@ public class TempResource {
         }
         Temp entity = entityManager.find(Temp.class, temp.getId());
         if (entity==null) {
+            System.out.println("ID not found");
             throw new BadRequestException("ID not found - " + temp.getId());
         }
         try {
             entityManager.persist(temp);
         } catch (Exception e) {
+            System.out.println("Unable to update with ID");
             throw new BadRequestException("Unable to update with ID " + entity.getId());
         }
     }
@@ -70,8 +73,6 @@ public class TempResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional(Transactional.TxType.REQUIRED)
     public void create(Temp entity) {
-        System.out.println("entity = " + entity);
-
         TypedQuery<Temp> query = entityManager.createNamedQuery("getTempByName", Temp.class);
         List<Temp> list = query.setParameter("name", entity.getName()).getResultList();
         if (!list.isEmpty()) {
@@ -83,6 +84,7 @@ public class TempResource {
             throw new BadRequestException("Unable to create with ID " + entity.getId());
         }
     }
+
     @GET
     @Path("name/{name}")
     @Produces(MediaType.APPLICATION_JSON)
