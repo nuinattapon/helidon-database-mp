@@ -8,6 +8,7 @@
     <jta-data-source>test</jta-data-source>
     <class>me.nui.mp.database.Pokemon</class>
     <class>me.nui.mp.database.PokemonType</class>
+    <class>me.nui.mp.database.Product</class>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
       <property name="javax.persistence.sql-load-script-source" value="META-INF/init_script.sql"/>
