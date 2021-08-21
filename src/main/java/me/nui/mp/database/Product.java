@@ -13,13 +13,25 @@ import javax.persistence.*;
         @NamedQuery(name = "getProductByName",
                 query = "SELECT t FROM Product t WHERE t.name = :name")
 })
-@Access(value = AccessType.FIELD)
 public class Product {
 
+//    @Id
+//    @SequenceGenerator(name = "product_seq", allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")
+//    @Column(nullable = false, updatable = false)
+
+    // Using this annotation will generate table like this
+    // CREATE TABLE `product` (
+    // `id` bigint NOT NULL AUTO_INCREMENT,
+    // `name` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
+    // `price` double NOT NULL,
+    // PRIMARY KEY (`id`),
+    // UNIQUE KEY `name_unique` (`name`)
+    // ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
     @Id
-    @SequenceGenerator(name = "product_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "product_seq")
-    @Column(length = 36, nullable = false, updatable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false, updatable = false)
     private long id;
 
     @Column(nullable = false, length = 120)

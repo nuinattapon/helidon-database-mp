@@ -1,10 +1,11 @@
 package me.nui.mp.database;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
-import java.util.UUID;
 
 
-@Entity(name = "Temp")
+@Entity
 @Table(name = "temp", uniqueConstraints = {@UniqueConstraint(name = "name_unique", columnNames = {"name"})})
 @NamedQueries({
         @NamedQuery(name = "getTemps",
@@ -14,25 +15,21 @@ import java.util.UUID;
         @NamedQuery(name = "getTempByName",
                 query = "SELECT t FROM Temp t WHERE t.name = :name")
 })
-@Access(value = AccessType.FIELD)
 public class Temp {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false, updatable = false)
-    private long id;
-
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid2")
+    @Column(length = 36, nullable = false, updatable = false)
+    private String id;
     @Column(nullable = false, length = 120)
     private String name;
 
-    @Column(nullable = false)
-    private double price;
-
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -44,20 +41,12 @@ public class Temp {
         this.name = name;
     }
 
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "Temp{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", price=" + price +
                 '}';
     }
 }

@@ -23,3 +23,9 @@ INSERT INTO pokemon VALUES (3, 'Squirtle', 11);
 INSERT INTO pokemon VALUES (4, 'Caterpie', 7);
 INSERT INTO pokemon VALUES (5, 'Weedle', 7);
 INSERT INTO pokemon VALUES (6, 'Pidgey', 3);
+
+INSERT INTO product (name, price) VALUES ('Product A', 100);
+INSERT INTO product (name, price) VALUES ('Product B', 101);
+INSERT INTO product (name, price) VALUES ('Product C', 102);
+INSERT INTO product (name, price) VALUES ('Product D', 103);
+INSERT INTO product (name, price) VALUES ('Product E', 104);
