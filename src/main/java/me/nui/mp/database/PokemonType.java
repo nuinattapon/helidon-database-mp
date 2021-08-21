@@ -8,7 +8,7 @@ import javax.persistence.*;
  *
  * Pokémon, and Pokémon character names are trademarks of Nintendo.
  */
-@Entity(name = "PokemonType")
+@Entity
 @Table(name = "pokemontype", uniqueConstraints = {@UniqueConstraint(name="name_unique",columnNames = {"name"})})
 @Access(AccessType.FIELD)
 @NamedQueries({

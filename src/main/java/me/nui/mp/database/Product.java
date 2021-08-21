@@ -3,7 +3,7 @@ package me.nui.mp.database;
 import javax.persistence.*;
 
 
-@Entity(name = "Product")
+@Entity
 @Table(name = "product", uniqueConstraints = {@UniqueConstraint(name = "name_unique", columnNames = {"name"})})
 @NamedQueries({
         @NamedQuery(name = "getProducts",
