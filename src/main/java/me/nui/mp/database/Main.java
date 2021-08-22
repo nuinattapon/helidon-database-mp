@@ -2,13 +2,16 @@ package me.nui.mp.database;
 
 
 import io.helidon.microprofile.server.Server;
+import org.eclipse.microprofile.auth.LoginConfig;
 import org.eclipse.microprofile.config.ConfigProvider;
-import org.eclipse.microprofile.config.inject.ConfigProperty;
 
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.core.Application;
 import java.util.Arrays;
-import java.util.Optional;
 
-public final class Main {
+//@LoginConfig(authMethod = "MP-JWT", realmName = "Packt")
+//@ApplicationPath("/")
+public final class Main extends Application {
 
     private Main() {
     }
@@ -16,21 +19,15 @@ public final class Main {
 
     public static void main(final String[] args) {
         Server server = startServer();
-        System.out.println("http://localhost:" + server.port());
+//        System.out.println("http://localhost:" + server.port());
 
-        Iterable<String> iterable = ConfigProvider.getConfig().getPropertyNames();
 
+        // Show all configs
+//        Iterable<String> iterable = ConfigProvider.getConfig().getPropertyNames();
 //        for (String s : iterable) {
-//            Optional<String> value = ConfigProvider.getConfig().getOptionalValue(s, String.class);
-//            if (value.isPresent()) {
-//                System.out.printf("'%s' - '%s'\n", s, value);
-//            }
+//            String[] propertyString = ConfigProvider.getConfig().getValue(s , String[].class);
+//                System.out.printf("'%s' - %s\n", s, Arrays.toString(propertyString));
 //        }
-
-        for (String s : iterable) {
-            String[] propertyString = ConfigProvider.getConfig().getValue(s , String[].class);
-                System.out.printf("'%s' - %s\n", s, Arrays.toString(propertyString));
-        }
 
 
     }
