@@ -55,10 +55,10 @@ public class Temp {
         return updatedAt;
     }
 
-    @Column(nullable = false, updatable = false)
+    @Column(nullable = false, updatable = false,name="created_at")
     private OffsetDateTime createdAt;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name="updated_at")
     private OffsetDateTime updatedAt;
 
     @PrePersist
