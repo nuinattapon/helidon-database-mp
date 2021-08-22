@@ -26,6 +26,7 @@ public class Temp {
     @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "uuid2")
     @Column(length = 36, nullable = false, updatable = false)
     private String id;
+
     @Column(nullable = false, length = 120)
     private String name;
 
@@ -43,6 +44,15 @@ public class Temp {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+
+    public OffsetDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
     @Column(nullable = false, updatable = false)
