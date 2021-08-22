@@ -15,7 +15,9 @@ import java.time.OffsetDateTime;
         @NamedQuery(name = "getTempById",
                 query = "SELECT t FROM Temp t WHERE t.id = :id"),
         @NamedQuery(name = "getTempByName",
-                query = "SELECT t FROM Temp t WHERE t.name = :name")
+                query = "SELECT t FROM Temp t WHERE t.name = :name"),
+        @NamedQuery(name = "updateTempName",
+                query = "UPDATE Temp SET name = :name WHERE id = :id")
 })
 public class Temp {
 

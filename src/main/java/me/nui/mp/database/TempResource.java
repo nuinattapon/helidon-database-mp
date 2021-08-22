@@ -1,13 +1,15 @@
 
 package me.nui.mp.database;
 
+import io.helidon.microprofile.cors.CrossOrigin;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.StreamingOutput;
 import java.util.List;
 
 @Path("temps")
@@ -51,7 +53,7 @@ public class TempResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional(Transactional.TxType.REQUIRED)
     public void update(Temp temp) {
-        System.out.println("entity = " + temp);
+        System.out.println("Update entity to " + temp);
 
         if(temp.getId().isEmpty()) {
             throw new BadRequestException("ID not provided - " + temp.getId());
@@ -62,9 +64,15 @@ public class TempResource {
             throw new BadRequestException("ID not found - " + temp.getId());
         }
         try {
-            entityManager.persist(temp);
+//            Query query = entityManager.createNamedQuery("updateTempName");
+//            query.setParameter("name", entity.getName())
+//                    .setParameter("id", entity.getId())
+//                    .executeUpdate();
+            entity.setName(temp.getName());
+            entityManager.merge(entity);
         } catch (Exception e) {
             System.out.println("Unable to update with ID");
+            e.printStackTrace();
             throw new BadRequestException("Unable to update with ID " + entity.getId());
         }
     }
