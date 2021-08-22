@@ -1,15 +1,12 @@
-
 package me.nui.mp.database;
-
-import io.helidon.microprofile.cors.CrossOrigin;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("temps")
@@ -39,11 +36,12 @@ public class TempResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional(Transactional.TxType.REQUIRED)
-    public void deleteById(@PathParam("id") String id) {
+    public Response deleteById(@PathParam("id") String id) {
         Temp entity = getById(id);
 
         try {
             entityManager.remove(entity);
+            return Response.ok(entity).build();
         } catch (Exception e) {
             throw new BadRequestException("Unable to delete with ID " + entity.getId());
         }
@@ -51,15 +49,16 @@ public class TempResource {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Transactional(Transactional.TxType.REQUIRED)
-    public void update(Temp temp) {
+    public Response update(Temp temp) {
         System.out.println("Update entity to " + temp);
 
-        if(temp.getId().isEmpty()) {
+        if (temp.getId().isEmpty()) {
             throw new BadRequestException("ID not provided - " + temp.getId());
         }
         Temp entity = entityManager.find(Temp.class, temp.getId());
-        if (entity==null) {
+        if (entity == null) {
             System.out.println("ID not found");
             throw new BadRequestException("ID not found - " + temp.getId());
         }
@@ -75,12 +74,14 @@ public class TempResource {
             e.printStackTrace();
             throw new BadRequestException("Unable to update with ID " + entity.getId());
         }
+        return Response.ok(entity).build();
+
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional(Transactional.TxType.REQUIRED)
-    public void create(Temp entity) {
+    public Response create(Temp entity) {
         TypedQuery<Temp> query = entityManager.createNamedQuery("getTempByName", Temp.class);
         List<Temp> list = query.setParameter("name", entity.getName()).getResultList();
         if (!list.isEmpty()) {
@@ -91,6 +92,7 @@ public class TempResource {
         } catch (Exception e) {
             throw new BadRequestException("Unable to create with ID " + entity.getId());
         }
+        return Response.ok(entity).build();
     }
 
     @GET
