@@ -9,8 +9,8 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 import java.util.Arrays;
 
-//@LoginConfig(authMethod = "MP-JWT", realmName = "Packt")
-//@ApplicationPath("/")
+@LoginConfig(authMethod = "MP-JWT", realmName = "TCK-MP-JWT")
+@ApplicationPath("/")
 public final class Main extends Application {
 
     private Main() {
@@ -19,8 +19,6 @@ public final class Main extends Application {
 
     public static void main(final String[] args) {
         Server server = startServer();
-//        System.out.println("http://localhost:" + server.port());
-
 
         // Show all configs
 //        Iterable<String> iterable = ConfigProvider.getConfig().getPropertyNames();
