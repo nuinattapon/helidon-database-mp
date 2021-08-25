@@ -6,6 +6,8 @@ import io.helidon.media.jsonp.JsonpSupport;
 import io.helidon.webclient.WebClient;
 import io.helidon.webclient.WebClientResponse;
 import io.helidon.webserver.WebServer;
+import io.helidon.microprofile.server.Server;
+
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -23,12 +25,12 @@ import static org.hamcrest.Matchers.is;
 public class PokemonTest {
     private static final JsonBuilderFactory JSON_BUILDER = Json.createBuilderFactory(Collections.emptyMap());
 
-    private static WebServer webServer;
+    private static Server webServer;
     private static WebClient webClient;
 
     @BeforeAll
     public static void startTheServer() {
-//        webServer = Main.startServer().await();
+        webServer = Main.startServer();
 
         webClient = WebClient.builder()
                 .baseUri("http://localhost:" + "8080")

@@ -2,6 +2,7 @@
 package me.nui.mp.database;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * A Pokemon Type entity. A type is represented by an ID and a name.
@@ -27,6 +28,9 @@ public class PokemonType {
     @Column(name = "name")
     private String name;
 
+    @OneToMany(mappedBy = "pokemonType", orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Pokemon> pokemons;
+
     public PokemonType() {
     }
 
@@ -44,5 +48,13 @@ public class PokemonType {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Pokemon> getPokemons() {
+        return pokemons;
+    }
+
+    public void setPokemons(List<Pokemon> pokemons) {
+        this.pokemons = pokemons;
     }
 }

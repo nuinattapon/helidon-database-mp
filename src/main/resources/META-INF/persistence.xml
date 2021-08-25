@@ -13,8 +13,8 @@
     <class>me.nui.mp.database.Temp2</class>
 
     <properties>
-      <property name="javax.persistence.schema-generation.database.action" value="none"/>
-<!--      <property name="javax.persistence.sql-load-script-source" value="META-INF/init_script.sql"/>-->
+      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.sql-load-script-source" value="META-INF/init_script.sql"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
     </properties>
 

@@ -54,6 +54,7 @@ public class Pokemon {
     }
 
     @ManyToOne
+    @JoinColumn(name = "pokemon_type_id", nullable = true)
     public PokemonType getPokemonType() {
         return pokemonType;
     }
